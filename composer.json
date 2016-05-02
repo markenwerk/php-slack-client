@@ -1,0 +1,31 @@
+{
+  "name": "markenwerk/slack-client",
+  "type": "library",
+  "description": "A basic Slack client library providing simple posting to Slack channels using the webhook API.",
+  "keywords": [
+    "Slack",
+    "API"
+  ],
+  "homepage": "http://markenwerk.net/",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Martin Brecht-Precht",
+      "email": "mb@markenwerk.net",
+      "homepage": "http://markenwerk.net"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "SlackClient\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=5.3",
+    "markenwerk/json-http-client": "~2.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.8",
+    "codeclimate/php-test-reporter": "dev-master"
+  }
+}
