@@ -6,7 +6,8 @@ engines:
       - ruby
       - javascript
       - python
-      - php
+        php:
+          mass_threshold: 50
   fixme:
     enabled: true
   phpmd:
@@ -16,12 +17,6 @@ engines:
         enabled: false
       Design/TooManyPublicMethods:
         enabled: false
-  duplication:
-    enabled: true
-    config:
-      languages:
-        php:
-          mass_threshold: 50
 ratings:
   paths:
   - "**.inc"
