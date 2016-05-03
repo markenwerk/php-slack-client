@@ -3,9 +3,6 @@ engines:
     enabled: true
     config:
       languages:
-      - ruby
-      - javascript
-      - python
         php:
           mass_threshold: 50
   fixme:
