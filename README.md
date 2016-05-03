@@ -28,24 +28,30 @@ A basic Slack client library providing simple posting to Slack channels using th
 require_once('path/to/vendor/autoload.php');
 ```
 
-### Posting to a channel
+### Posting to a channel or member
 
-The following example will produce a post in a Slack channel looking like this: 
+The following example will post to a Slack channel or member looking like this: 
 
-![Slack ]
+![Slack Example Post](example-post.png "Slack Example Post")
+
+#### Setup the API client
 
 ```{php}
-use SlackClient\SlackAttachment;
-use SlackClient\SlackAttachmentField;
 use SlackClient\SlackClient;
-use SlackClient\SlackMessage;
 
 $client = new SlackClient();
 $client
 	->setSubdomainName('markenwerk')
 	->setToken('<YOUR_API_TOKEN>')
-	->setUsername('PHP SlackClient')
-	->setChannel('#log');
+	->setUsername('PHP SlackClient');
+```
+
+#### Setup a Slack message with attachments
+
+```{php}
+use SlackClient\SlackAttachment;
+use SlackClient\SlackAttachmentField;
+use SlackClient\SlackMessage;
 
 $message = new SlackMessage();
 $message
@@ -92,18 +98,19 @@ $attachment
 	->addField($anotherAttachmentField);
 
 $message->addAttachment($attachment);
-
-$client->post($message);
 ```
 
----
+#### Post to a channel
 
-## Extending the Basic HTTP Client
+```{php}
+$client->postToChannel('#channel', $message);
+```
 
-Every part of the client is based upon proper interfaces. Most class instances can get injected into the client itself. 
-If you want to extend the client just write some classes implementing the according interface and you´re done with that. 
+#### Post to a member
 
-Take a look at the [PHP JSON HTTP Client](https://github.com/markenwerk/php-json-http-client) which is an extension of the PHP Basic HTTP Client.
+```{php}
+$client->postToMember('@member', $message);
+```
 
 ---
 
@@ -114,14 +121,12 @@ You can find more information about [PHP Common Exceptions at Github](https://gi
 
 ### Exceptions to be expected
 
-In general you should expect that any setter method could thrown an `\InvalidArgumentException`. The following exceptions could get thrown while using PHP Basic HTTP Client.
+In general you should expect that any setter method could thrown an `\InvalidArgumentException`. The following exceptions could get thrown while using PHP Slack Client.
 
-- `CommonException\IoException\FileNotFoundException` on configuring a `ClientCertificateAuthentication`instance
-- `CommonException\IoException\FileReadableException` on configuring a `ClientCertificateAuthentication`instance
-- `BasicHttpClient\Exception\HttpRequestAuthenticationException` on performing a request
-- `BasicHttpClient\Exception\HttpRequestException` on performing a request
-- `CommonException\NetworkException\ConnectionTimeoutException` on performing a request
-- `CommonException\NetworkException\CurlException` on performing a request
+- `CommonException\ParserException\StringifyException` on posting to Slack
+- `CommonException\NetworkException\UnexpectedResponseException` on posting to Slack
+- `CommonException\NetworkException\ConnectionTimeoutException` on posting to Slack
+- `CommonException\NetworkException\CurlException` on posting to Slack
 
 ---
 
