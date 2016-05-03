@@ -16,6 +16,11 @@ engines:
         enabled: false
       Design/TooManyPublicMethods:
         enabled: false
+  duplication:
+    enabled: true
+    checks:
+      Identical code:
+        enabled: false
 ratings:
   paths:
   - "**.inc"
