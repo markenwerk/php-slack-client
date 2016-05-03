@@ -183,7 +183,8 @@ class SlackClient
 	 */
 	protected function buildEndpoint()
 	{
-		return 'https://' . $this->getSubdomainName() . '.slack.com/services/hooks/incoming-webhook?token=' . $this->getToken();
+		return 'https://' . $this->getSubdomainName() . '.slack.com/services/hooks/incoming-webhook?token='
+		. $this->getToken();
 	}
 
 	/**

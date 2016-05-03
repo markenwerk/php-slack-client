@@ -79,6 +79,17 @@ Any bugfix that doesn’t include a test proving the existence of the bug being 
 
 We’ve found that test-first development really helps make features better architected and identifies potential edge cases earlier instead of later. Writing tests before the implementation is strongly encouraged.
 
+#### Test preconditions
+
+Sometimes tests need some extra information gathered from environment variables. Please setup the following environment variables in your test setup. PHPUnit and Travis allow to simply adding them to test environment. 
+
+| Environment variable name | Description                                     |
+| ------------------------- | ----------------------------------------------- |
+| SLACK_SUBDOMAIN           | The subdomain part of the API endpoint URL      |
+| SLACK_API_TOKEN           | The Slack API token                             |
+| SLACK_TEST_MEMBER         | The `@member` name to post the test message to  |
+| SLACK_TEST_CHANNEL        | The `#channel` name to post the test message to |
+
 ## Full example
 
 Here’s an example workflow for `php-slack-client` hosted on Github, which is currently in version 1.0.2. Your username is `yourname` and you’re submitting a basic bugfix. 

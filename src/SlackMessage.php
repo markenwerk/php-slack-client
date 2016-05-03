@@ -74,7 +74,10 @@ class SlackMessage implements SlackMessageInterface
 		foreach ($attachments as $attachment) {
 			if (!$attachment instanceof SlackAttachmentInterface) {
 				$argumentType = (is_object($attachment)) ? get_class($attachment) : gettype($attachment);
-				throw new \InvalidArgumentException('Expected the attachments as array of SlackAttachmentInterface implementations. Found ' . $argumentType);
+				throw new \InvalidArgumentException(
+					'Expected the attachments as array of SlackAttachmentInterface implementations. Found '
+					. $argumentType
+				);
 			}
 		}
 		$this->attachments = $attachments;

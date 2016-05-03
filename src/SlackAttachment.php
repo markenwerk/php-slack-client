@@ -94,7 +94,10 @@ class SlackAttachment implements SlackAttachmentInterface
 		foreach ($fields as $field) {
 			if (!$field instanceof SlackAttachmentFieldInterface) {
 				$argumentType = (is_object($field)) ? get_class($field) : gettype($field);
-				throw new \InvalidArgumentException('Expected the attachment fields as array of SlackAttachmentInterface implementations. Found ' . $argumentType);
+				throw new \InvalidArgumentException(
+					'Expected the attachment fields as array of SlackAttachmentInterface implementations. Found '
+					. $argumentType
+				);
 			}
 		}
 		$this->fields = $fields;
