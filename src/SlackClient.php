@@ -34,11 +34,6 @@ class SlackClient
 	/**
 	 * @var string
 	 */
-	private $channel = '#general';
-
-	/**
-	 * @var string
-	 */
 	private $username = 'PHP Slack Client';
 
 	/**
@@ -88,31 +83,6 @@ class SlackClient
 	/**
 	 * @return string
 	 */
-	public function getChannel()
-	{
-		return $this->channel;
-	}
-
-	/**
-	 * @param string $channel
-	 * @return $this
-	 */
-	public function setChannel($channel)
-	{
-		if (!is_string($channel)) {
-			$argumentType = (is_object($channel)) ? get_class($channel) : gettype($channel);
-			throw new \InvalidArgumentException('Expected the channel name as string. Got ' . $argumentType);
-		}
-		if (mb_substr($channel, 0, 1) != '#') {
-			throw new \InvalidArgumentException('The channel name is invalid. It has to start with "#".');
-		}
-		$this->channel = $channel;
-		return $this;
-	}
-
-	/**
-	 * @return string
-	 */
 	public function getUsername()
 	{
 		return $this->username;
@@ -133,13 +103,62 @@ class SlackClient
 	}
 
 	/**
+	 * @param string $channel
 	 * @param SlackMessageInterface $slackMessage
 	 * @return $this
+	 * @throws StringifyException
+	 * @throws UnexpectedResponseException
+	 * @throws ConnectionTimeoutException
+	 * @throws CurlException
 	 */
-	public function post(SlackMessageInterface $slackMessage)
+	public function postToChannel($channel, SlackMessageInterface $slackMessage)
+	{
+		if (!is_string($channel)) {
+			$argumentType = (is_object($channel)) ? get_class($channel) : gettype($channel);
+			throw new \InvalidArgumentException('Expected the channel name as string. Got ' . $argumentType);
+		}
+		if (mb_substr($channel, 0, 1) != '#') {
+			throw new \InvalidArgumentException('The channel name is invalid. It has to start with "#".');
+		}
+		$payload = $this->buildPayload($channel, $slackMessage);
+		$endpoint = $this->buildEndpoint();
+		$this->performRequest($endpoint, $payload);
+		return $this;
+	}
+
+	/**
+	 * @param string $member
+	 * @param SlackMessageInterface $slackMessage
+	 * @return $this
+	 * @throws StringifyException
+	 * @throws UnexpectedResponseException
+	 * @throws ConnectionTimeoutException
+	 * @throws CurlException
+	 */
+	public function postToMember($member, SlackMessageInterface $slackMessage)
+	{
+		if (!is_string($member)) {
+			$argumentType = (is_object($member)) ? get_class($member) : gettype($member);
+			throw new \InvalidArgumentException('Expected the channel name as string. Got ' . $argumentType);
+		}
+		if (mb_substr($member, 0, 1) != '@') {
+			throw new \InvalidArgumentException('The mamber name is invalid. It has to start with "@".');
+		}
+		$payload = $this->buildPayload($member, $slackMessage);
+		$endpoint = $this->buildEndpoint();
+		$this->performRequest($endpoint, $payload);
+		return $this;
+	}
+
+	/**
+	 * @param string $receiver
+	 * @param SlackMessageInterface $slackMessage
+	 * @return array
+	 */
+	protected function buildPayload($receiver, SlackMessageInterface $slackMessage)
 	{
 		$payload = array(
-			'channel' => $this->getChannel(),
+			'channel' => $receiver,
 			'username' => $this->getUsername(),
 			'text' => $slackMessage->getText(),
 			'unfurl_links' => $slackMessage->getUnfurlLinks(),
@@ -156,10 +175,15 @@ class SlackClient
 				$payload['attachments'][] = $attachment->toArray();
 			}
 		}
-		$endpoint = 'https://' . $this->getSubdomainName() . '.slack.com/services/hooks/incoming-webhook?token='
-			. $this->getToken();
-		$this->performRequest($endpoint, $payload);
-		return $this;
+		return $payload;
+	}
+
+	/**
+	 * @return string
+	 */
+	protected function buildEndpoint()
+	{
+		return 'https://' . $this->getSubdomainName() . '.slack.com/services/hooks/incoming-webhook?token=' . $this->getToken();
 	}
 
 	/**
@@ -191,7 +215,8 @@ class SlackClient
 			->getResponse();
 		if ($response->getStatusCode() < 200 || $response->getStatusCode() >= 300) {
 			throw new UnexpectedResponseException(
-				'Slack API responded unexpected with HTTP status ' . (string)$response->getStatusText()
+				'Slack API responded unexpected with HTTP status "' . (string)$response->getStatusText() . '"'
+				. ' and message "' . $response->getBody() . '"'
 			);
 		}
 	}

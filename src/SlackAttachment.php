@@ -89,12 +89,8 @@ class SlackAttachment implements SlackAttachmentInterface
 	 * @param SlackAttachmentFieldInterface[] $fields
 	 * @return $this
 	 */
-	public function setFields($fields)
+	public function setFields(array $fields)
 	{
-		if (!is_array($fields)) {
-			$argumentType = (is_object($fields)) ? get_class($fields) : gettype($fields);
-			throw new \InvalidArgumentException('Expected the attachment fields as array. Got ' . $argumentType);
-		}
 		foreach ($fields as $field) {
 			if (!$field instanceof SlackAttachmentFieldInterface) {
 				$argumentType = (is_object($field)) ? get_class($field) : gettype($field);
@@ -124,9 +120,19 @@ class SlackAttachment implements SlackAttachmentInterface
 		for ($i = 0; $i < count($this->fields); $i++) {
 			if ($this->fields[$i] == $field) {
 				unset($this->fields[$i]);
+				$this->fields = array_values($this->fields);
 				return $this;
 			}
 		}
+		return $this;
+	}
+
+	/**
+	 * @return $this
+	 */
+	public function clearFields()
+	{
+		$this->fields = array();
 		return $this;
 	}
 
