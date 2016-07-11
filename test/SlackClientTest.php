@@ -1,11 +1,11 @@
 <?php
 
-namespace SlackClient;
+namespace Markenwerk\SlackClient;
 
 /**
  * Class SlackClientTest
  *
- * @package SlackClient
+ * @package Markenwerk\SlackClient
  */
 class SlackClientTest extends \PHPUnit_Framework_TestCase
 {

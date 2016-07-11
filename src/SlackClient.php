@@ -1,22 +1,22 @@
 <?php
 
-namespace SlackClient;
+namespace Markenwerk\SlackClient;
 
-use BasicHttpClient\Request\Message\Body\Body;
-use BasicHttpClient\Request\Message\Header\Header;
-use BasicHttpClient\Request\Message\Message;
-use BasicHttpClient\Request\Request;
-use BasicHttpClient\Request\Transport\HttpsTransport;
-use CommonException\ApiException\UnexpectedResponseException;
-use CommonException\NetworkException\ConnectionTimeoutException;
-use CommonException\NetworkException\CurlException;
-use CommonException\ParserException\StringifyException;
-use Url\Url;
+use Markenwerk\BasicHttpClient\Request\Message\Body\Body;
+use Markenwerk\BasicHttpClient\Request\Message\Header\Header;
+use Markenwerk\BasicHttpClient\Request\Message\Message;
+use Markenwerk\BasicHttpClient\Request\Request;
+use Markenwerk\BasicHttpClient\Request\Transport\HttpsTransport;
+use Markenwerk\CommonException\ApiException\UnexpectedResponseException;
+use Markenwerk\CommonException\NetworkException\ConnectionTimeoutException;
+use Markenwerk\CommonException\NetworkException\CurlException;
+use Markenwerk\CommonException\ParserException\StringifyException;
+use Markenwerk\UrlUtil\Url;
 
 /**
  * Class SlackClient
  *
- * @package SlackClient
+ * @package Markenwerk\SlackClient
  */
 class SlackClient
 {

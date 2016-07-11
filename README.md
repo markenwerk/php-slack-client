@@ -15,7 +15,7 @@ A basic Slack client library providing simple posting to Slack channels using th
 ```{json}
 {
    	"require": {
-        "markenwerk/slack-client": "~1.0"
+        "markenwerk/slack-client": "~2.0"
     }
 }
 ```
@@ -37,7 +37,7 @@ The following example will post to a Slack channel or member looking like this:
 #### Setup the API client
 
 ```{php}
-use SlackClient\SlackClient;
+use Markenwerk\SlackClient\SlackClient;
 
 $client = new SlackClient();
 $client
@@ -49,9 +49,9 @@ $client
 #### Setup a Slack message with attachments
 
 ```{php}
-use SlackClient\SlackAttachment;
-use SlackClient\SlackAttachmentField;
-use SlackClient\SlackMessage;
+use Markenwerk\SlackClient\SlackAttachment;
+use Markenwerk\SlackClient\SlackAttachmentField;
+use Markenwerk\SlackClient\SlackMessage;
 
 $message = new SlackMessage();
 $message
@@ -123,10 +123,10 @@ You can find more information about [PHP Common Exceptions at Github](https://gi
 
 In general you should expect that any setter method could thrown an `\InvalidArgumentException`. The following exceptions could get thrown while using PHP Slack Client.
 
-- `CommonException\ParserException\StringifyException` on posting to Slack
-- `CommonException\NetworkException\UnexpectedResponseException` on posting to Slack
-- `CommonException\NetworkException\ConnectionTimeoutException` on posting to Slack
-- `CommonException\NetworkException\CurlException` on posting to Slack
+- `Markenwerk\CommonException\ParserException\StringifyException` on posting to Slack
+- `Markenwerk\CommonException\NetworkException\UnexpectedResponseException` on posting to Slack
+- `Markenwerk\CommonException\NetworkException\ConnectionTimeoutException` on posting to Slack
+- `Markenwerk\CommonException\NetworkException\CurlException` on posting to Slack
 
 ---
 

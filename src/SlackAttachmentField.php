@@ -1,11 +1,11 @@
 <?php
 
-namespace SlackClient;
+namespace Markenwerk\SlackClient;
 
 /**
  * Class SlackAttachmentField
  *
- * @package SlackClient
+ * @package Markenwerk\SlackClient
  */
 class SlackAttachmentField implements SlackAttachmentFieldInterface
 {
