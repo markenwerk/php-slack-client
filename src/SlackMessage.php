@@ -100,7 +100,8 @@ class SlackMessage implements SlackMessageInterface
 	 */
 	public function removeAttachment(SlackAttachment $attachment)
 	{
-		for ($i = 0; $i < count($this->attachments); $i++) {
+		$attachmentCount = count($this->attachments);
+		for ($i = 0; $i < $attachmentCount; $i++) {
 			if ($this->attachments[$i] == $attachment) {
 				unset($this->attachments[$i]);
 				$this->attachments = array_values($this->attachments);

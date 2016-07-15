@@ -197,7 +197,7 @@ class SlackClient
 	 */
 	protected function performRequest($endpoint, array $payload)
 	{
-		$requestBody = @json_encode($payload);
+		$requestBody = json_encode($payload);
 		if ($requestBody === false) {
 			throw new StringifyException('Building payload failed.');
 		}

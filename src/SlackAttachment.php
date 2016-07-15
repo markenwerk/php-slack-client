@@ -120,7 +120,8 @@ class SlackAttachment implements SlackAttachmentInterface
 	 */
 	public function removeField(SlackAttachmentFieldInterface $field)
 	{
-		for ($i = 0; $i < count($this->fields); $i++) {
+		$fieldCount = count($this->fields);
+		for ($i = 0; $i < $fieldCount; $i++) {
 			if ($this->fields[$i] == $field) {
 				unset($this->fields[$i]);
 				$this->fields = array_values($this->fields);
