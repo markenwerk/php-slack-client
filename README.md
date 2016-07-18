@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/markenwerk/php-slack-client.svg?branch=master)](https://travis-ci.org/markenwerk/php-slack-client)
 [![Test Coverage](https://codeclimate.com/github/markenwerk/php-slack-client/badges/coverage.svg)](https://codeclimate.com/github/markenwerk/php-slack-client/coverage)
 [![Dependency Status](https://www.versioneye.com/user/projects/5728e2a8a0ca35005083fb90/badge.svg)](https://www.versioneye.com/user/projects/5728e2a8a0ca35005083fb90)
-[![SensioLabs Insight](https://img.shields.io/sensiolabs/i/e08adabd-a550-4934-b011-24c006af3f7d.svg)](https://insight.sensiolabs.com/projects/e08adabd-a550-4934-b011-24c006af3f7d)
+[![SensioLabs Insight](https://img.shields.io/sensiolabs/i/d4583d4b-5425-45d4-954d-8bcf5c30c9b1.svg)](https://insight.sensiolabs.com/projects/d4583d4b-5425-45d4-954d-8bcf5c30c9b1)
 [![Code Climate](https://codeclimate.com/github/markenwerk/php-slack-client/badges/gpa.svg)](https://codeclimate.com/github/markenwerk/php-slack-client)
 [![Latest Stable Version](https://poser.pugx.org/markenwerk/slack-client/v/stable)](https://packagist.org/packages/markenwerk/slack-client)
 [![Total Downloads](https://poser.pugx.org/markenwerk/slack-client/downloads)](https://packagist.org/packages/markenwerk/slack-client)
